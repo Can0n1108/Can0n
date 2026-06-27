@@ -21,35 +21,79 @@
 | AI | Google Gemini 2.0 Flash |
 | 构建 | Vite、tsx |
 
+## 系统架构
+
+```mermaid
+graph TB
+    subgraph 前端["前端 - React 18"]
+        direction TB
+        A[LoginPage / RegisterPage]
+        B[DashboardPage]
+        C[AnalysisPage]
+        D[ReportPage]
+        E[HistoryPage]
+        F[AuthContext / ToastContext]
+        G[Layout / ParticleBackground]
+    end
+
+    subgraph 后端["后端 - Express"]
+        direction TB
+        H[路由 / WebSocket]
+        I[Gemini 服务]
+        J[多智能体调度]
+    end
+
+    subgraph 数据["数据层"]
+        K[(PostgreSQL / Neon)]
+        L[Drizzle ORM]
+        M[schema.ts]
+    end
+
+    A --> H
+    B --> H
+    C --> H --> WebSocket
+    D --> H
+    E --> H
+    H --> I --> J
+    H --> L --> M --> K
+    J -->|Gemini API| N[Google Gemini 2.0 Flash]
+```
+
 ## 项目结构
 
-```
-Can0n-ai/
-├── client/                # 前端 React 应用
-│   ├── src/
-│   │   ├── components/    # 公共组件 (Layout, ParticleBackground)
-│   │   ├── context/       # React Context (Auth, Toast)
-│   │   ├── pages/         # 页面组件
-│   │   │   ├── DashboardPage.tsx   # 仪表盘
-│   │   │   ├── AnalysisPage.tsx    # 分析页
-│   │   │   ├── ReportPage.tsx      # 报告页
-│   │   │   ├── HistoryPage.tsx     # 历史记录
-│   │   │   ├── LoginPage.tsx       # 登录
-│   │   │   └── RegisterPage.tsx    # 注册
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   └── index.html
-├── server/                # 后端 Express 服务
-│   ├── services/
-│   │   └── gemini.ts      # Gemini API 调用 & 多智能体逻辑
-│   └── index.ts           # 路由、WebSocket、数据库
-├── shared/
-│   └── schema.ts          # 数据库表结构 (Drizzle ORM)
-├── docker-compose.yml     # 本地 PostgreSQL 容器
-├── Dockerfile             # 生产环境镜像
-├── drizzle.config.ts      # Drizzle 配置
-├── package.json
-└── tsconfig.json
+```mermaid
+graph LR
+    Root[Can0n-ai] --> Client[client/]
+    Root --> Server[server/]
+    Root --> Shared[shared/]
+    Root --> Config[配置文件]
+
+    Client --> CSrc[src/]
+    CSrc --> Comp[components/]
+    CSrc --> Ctx[context/]
+    CSrc --> Pages[pages/]
+    Pages --> P1[DashboardPage]
+    Pages --> P2[AnalysisPage]
+    Pages --> P3[ReportPage]
+    Pages --> P4[HistoryPage]
+    Pages --> P5[LoginPage]
+    Pages --> P6[RegisterPage]
+    Comp --> L1[Layout]
+    Comp --> L2[ParticleBackground]
+    Ctx --> C1[AuthContext]
+    Ctx --> C2[ToastContext]
+
+    Server --> SSvc[services/]
+    SSvc --> Gemini[gemini.ts]
+    Server --> SIdx[index.ts]
+
+    Shared --> Schema[schema.ts]
+
+    Config --> DC[docker-compose.yml]
+    Config --> DF[Dockerfile]
+    Config --> DZ[drizzle.config.ts]
+    Config --> PF[package.json]
+    Config --> TS[tsconfig.json]
 ```
 
 ## 快速开始
