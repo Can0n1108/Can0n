@@ -1,0 +1,290 @@
+@import "tailwindcss";
+
+/* 自定义滚动条 */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+/* 全局过渡动画 */
+.fade-in { animation: fadeIn 0.3s ease-in-out; }
+.slide-up { animation: slideUp 0.3s ease-out; }
+.pulse-dot { animation: pulse 2s infinite; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* 毛玻璃效果 */
+.glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.glass-strong {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+.glass-dark {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.glass-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* 健康数据卡片渐变 */
+.card-gradient-blue { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+.card-gradient-green { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+.card-gradient-purple { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); }
+.card-gradient-amber { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); }
+.card-gradient-rose { background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%); }
+.card-gradient-cyan { background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); }
+
+/* 时间线动画 */
+.timeline-dot {
+    animation: timelinePulse 2s infinite;
+}
+.timeline-active {
+    animation: timelineGlow 1.5s ease-in-out infinite;
+}
+@keyframes timelinePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+}
+@keyframes timelineGlow {
+    0%, 100% { box-shadow: 0 0 8px rgba(59, 130, 246, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
+}
+
+/* 按下/点击效果 */
+.btn-press {
+    transition: transform 0.1s ease;
+}
+.btn-press:active {
+    transform: scale(0.95);
+}
+
+/* 光泽扫过效果 */
+.gloss-sweep {
+    position: relative;
+    overflow: hidden;
+}
+.gloss-sweep::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.4) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+.gloss-sweep:hover::after {
+    transform: translateX(100%);
+}
+
+/* 浮动动画 */
+.float-anim {
+    animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* 弹入效果 */
+.bounce-in {
+    animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    50% { opacity: 1; transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+/* 卡片hover浮起 */
+.card-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* 渐变边框动画 */
+.border-glow {
+    position: relative;
+}
+.border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+    background-size: 300% 300%;
+    animation: borderGlow 3s linear infinite;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.border-glow:hover::before {
+    opacity: 1;
+}
+
+@keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 骨架屏加载 */
+.skeleton {
+    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s infinite;
+}
+@keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* 页面过渡 */
+.page-enter {
+    animation: pageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes pageEnter {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 涟漪效果 */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+.ripple::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 10%);
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: transform 0.5s, opacity 1s;
+}
+.ripple:active::after {
+    background-size: 100%;
+    opacity: 0;
+    transition: 0s;
+}
+
+/* 打印时隐藏导航按钮，并优化报告样式 */
+@media print {
+    .print-hidden { display: none !important; }
+
+    /* 隐藏全局背景和装饰元素 */
+    body {
+        background: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* 移除所有毛玻璃效果 */
+    .glass, .glass-strong, .glass-dark, .glass-card,
+    [class*="glass"], [class*="backdrop-blur"] {
+        background: white !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: 1px solid #e5e7eb !important;
+        box-shadow: none !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* 确保所有卡片纯白背景 */
+    .card-gradient-blue,
+    .card-gradient-green,
+    .card-gradient-purple,
+    .card-gradient-amber,
+    .card-gradient-rose,
+    .card-gradient-cyan {
+        background: white !important;
+    }
+
+    /* 文本颜色确保可读 */
+    .text-gray-500, .text-gray-400, .text-gray-600 {
+        color: #4b5563 !important;
+    }
+    .text-gray-700, .text-gray-800 {
+        color: #1f2937 !important;
+    }
+    .text-blue-600, .text-blue-700 {
+        color: #1d4ed8 !important;
+    }
+    .text-emerald-600, .text-emerald-700 {
+        color: #059669 !important;
+    }
+    .text-amber-600, .text-amber-700 {
+        color: #d97706 !important;
+    }
+    .text-purple-600, .text-purple-700 {
+        color: #7c3aed !important;
+    }
+    .text-red-500 {
+        color: #ef4444 !important;
+    }
+
+    /* 展开所有折叠内容 */
+    [data-collapsed] {
+        max-height: none !important;
+        opacity: 1 !important;
+        display: block !important;
+    }
+
+    /* 移除卡片交互效果 */
+    .card-lift:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* 保留渐变色块（如智能体标题栏） */
+    .bg-gradient-to-r {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* 分页优化 */
+    .glass-card {
+        break-inside: avoid;
+    }
+
+    /* 隐藏Toast */
+    [class*="ToastContext"] > div:last-child {
+        display: none !important;
+    }
+}
